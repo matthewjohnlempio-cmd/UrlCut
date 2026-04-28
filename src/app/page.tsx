@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaReact, FaCopy, FaTrash } from "react-icons/fa";
+import { FaCopy, FaTrash } from "react-icons/fa";
 import { PiLinkSimpleFill } from "react-icons/pi";
 import { TbWorldCheck } from "react-icons/tb";
 import { LiaStaylinked } from "react-icons/lia";
@@ -34,9 +34,11 @@ export default function Home() {
     if (!url.trim()) return;
 
     const code = Math.random().toString(36).substring(2, 8);
-    const short = `http://localhost:3000/${code}`;
 
-    const newLink: LinkItem = {
+    const baseUrl = window.location.origin; // 👈 this is the fix
+    const short = `${baseUrl}/${code}`;
+
+    const newLink = {
       code,
       original: url,
       short,
